@@ -41,7 +41,7 @@ jobs:
       uses: actions/upload-artifact@v3
       if: always()
       with:
-          files: ${{ github.workspace }}/*/TestResults/*.xml
+          path: ${{ github.workspace }}/*/TestResults/*.xml
      
 #     - name: Upload dotnet test results
 #       uses: actions/upload-artifact@v3
