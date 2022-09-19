@@ -38,10 +38,10 @@ jobs:
       run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx"
         
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1
+      uses: actions/upload-artifact@v3
       if: always()
       with:
-            files: ${{ github.workspace }}/*/TestResults/*.xml
+          files: ${{ github.workspace }}/*/TestResults/*.xml
      
 #     - name: Upload dotnet test results
 #       uses: actions/upload-artifact@v3
