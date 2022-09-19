@@ -10,13 +10,15 @@ jobs:
   build:
 
     runs-on: windows-latest
-    defaults:
-      run:
-        working-directory: build
+#     defaults:
+#       run:
+#         working-directory: build
+# this shit breaks install step
+  
     strategy:
       matrix:
         dotnet-version: ['6.0.x']
-
+        
     steps:
     - uses: actions/checkout@v3
     
@@ -28,19 +30,26 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
       
+      
     - name: Build
       run: dotnet build --configuration Debug --no-restore
     
     - name: Test
       run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx"
-      
-    - name: Upload dotnet test results
-      uses: actions/upload-artifact@v3
+        
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      if: always()
       with:
-        name: dotnet-results-${{ matrix.dotnet-version }}
-        path: build/bin/debug/test-results.trx
-      # Use always() to always run this step to publish test results when there are test failures
-      if: ${{ always() }}
+            files: ${{ github.workspace }}/*/TestResults/*.xml
+     
+#     - name: Upload dotnet test results
+#       uses: actions/upload-artifact@v3
+#       with:
+#         name: dotnet-results-${{ matrix.dotnet-version }}
+#         path: build/bin/debug/test-results.trx
+#       # Use always() to always run this step to publish test results when there are test failures
+#       if: ${{ always() }}
       
     - name: Test Report
       uses: dorny/test-reporter@v1
