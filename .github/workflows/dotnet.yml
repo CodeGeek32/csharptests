@@ -29,13 +29,13 @@ jobs:
       run: dotnet build --configuration Debug --no-restore
     
     - name: Test
-      run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --results-directory "TestResults"
+      run: dotnet test --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx"
       
     - name: Upload dotnet test results
       uses: actions/upload-artifact@v3
       with:
         name: dotnet-results-${{ matrix.dotnet-version }}
-        path: TestResults
+        path: bin\debug\test-results.trx
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}
       
@@ -44,7 +44,7 @@ jobs:
       if: success() || failure()    # run this step even if previous step failed
       with:
         name: DOTNET Tests            # Name of the check run which will be created
-        path: TestResults/test-results.trx    # Path to test results
+        path: test-results.trx    # Path to test results
         reporter: dotnet-trx       # Format of test results
         list-tests: 'all'
         fail-on-error: 'true'
