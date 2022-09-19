@@ -29,7 +29,7 @@ jobs:
       run: dotnet build --configuration Debug --no-restore
     
     - name: Test
-      run: dotnet test apitests.dll --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      run: dotnet test ./bin/debug/apitests.dll --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx"
       
     - name: Test Report
       uses: dorny/test-reporter@v1
