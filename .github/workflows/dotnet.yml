@@ -12,7 +12,7 @@ jobs:
     runs-on: windows-latest
     defaults:
       run:
-        working-directory: ./build
+        working-directory: build
     strategy:
       matrix:
         dotnet-version: ['6.0.x']
