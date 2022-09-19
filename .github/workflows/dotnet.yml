@@ -10,6 +10,9 @@ jobs:
   build:
 
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ./build
     strategy:
       matrix:
         dotnet-version: ['6.0.x']
@@ -35,7 +38,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: dotnet-results-${{ matrix.dotnet-version }}
-        path: bin\debug\test-results.trx
+        path: build/bin/debug/test-results.trx
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}
       
