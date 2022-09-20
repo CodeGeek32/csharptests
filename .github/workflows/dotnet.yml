@@ -60,4 +60,4 @@ jobs:
         reporter: dotnet-trx       # Format of test results
         list-tests: 'all'
         fail-on-error: 'true'
-        #artifact: /test-results(.*)/
+        artifact: /test-results.trx/
