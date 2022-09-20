@@ -35,7 +35,7 @@ jobs:
       run: dotnet build --configuration Debug --no-restore
     
     - name: Test
-      run: dotnet test bin\debug\apitests.exe --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      run: dotnet test bin\debug\apitests.exe --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx" --results-directory "TestResults"
 
 # this is a working step, it successfully uploads test results artifact
 #     - name: Upload Unit Test Results
@@ -54,4 +54,4 @@ jobs:
         list-tests: 'all'
         fail-on-error: 'true'
         #artifact: test-results
-        path: ${{ github.workspace }}\TestResults\test-results.trx                # Path to test results (inside artifact .zip)
+        path: TestResults\test-results.trx                # Path to test results (inside artifact .zip)
