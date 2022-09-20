@@ -37,7 +37,7 @@ jobs:
     - name: Test
       run: dotnet test bin\debug\apitests.exe --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx"
         
-    - name: Publish Unit Test Results
+    - name: Upload Unit Test Results
       uses: actions/upload-artifact@v3
       if: always()
       with:
@@ -52,4 +52,5 @@ jobs:
         reporter: dotnet-trx       # Format of test results
         list-tests: 'all'
         fail-on-error: 'true'
-        artifact: test-results\test-results.trx
+        artifact: test-results
+        path: '*.xml'                     # Path to test results (inside artifact .zip)
