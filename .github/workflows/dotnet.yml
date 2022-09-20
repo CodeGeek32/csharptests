@@ -36,13 +36,14 @@ jobs:
     
     - name: Test
       run: dotnet test bin\debug\apitests.exe --no-restore --verbosity normal --logger "trx;LogFileName=test-results.trx"
-        
-    - name: Upload Unit Test Results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-          name: test-results
-          path: ${{ github.workspace }}\TestResults\test-results.trx
+
+# this is a working step, it successfully uploads test results artifact
+#     - name: Upload Unit Test Results
+#       uses: actions/upload-artifact@v3
+#       if: always()
+#       with:
+#           name: test-results              # name of resulting file on github page "test-results.zip"
+#           path: ${{ github.workspace }}\TestResults\test-results.trx             # take test results from this path
      
     - name: Test Report
       uses: dorny/test-reporter@v1
@@ -52,5 +53,5 @@ jobs:
         reporter: dotnet-trx       # Format of test results
         list-tests: 'all'
         fail-on-error: 'true'
-        artifact: test-results
-        path: test-results.trx                   # Path to test results (inside artifact .zip)
+        #artifact: test-results
+        path: ${{ github.workspace }}\TestResults\test-results.trx                # Path to test results (inside artifact .zip)
