@@ -56,8 +56,7 @@ jobs:
       if: success() || failure()    # run this step even if previous step failed
       with:
         name: DOTNET Tests            # Name of the check run which will be created
-        path: ${{ github.workspace }}\TestResults\test-results.trx    # Path to test results
         reporter: dotnet-trx       # Format of test results
         list-tests: 'all'
         fail-on-error: 'true'
-        artifact: /test-results.trx/
+        artifact: artifact\test-results.trx
