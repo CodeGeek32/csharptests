@@ -53,4 +53,4 @@ jobs:
         list-tests: 'all'
         fail-on-error: 'true'
         artifact: test-results
-        path: '*.trx'                     # Path to test results (inside artifact .zip)
+        path: test-results.trx                   # Path to test results (inside artifact .zip)
